@@ -1,6 +1,7 @@
 package com.example.job.controller;
 
 
+import com.example.job.dto.JobDto;
 import com.example.job.entity.Job;
 import com.example.job.service.JobService;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,7 @@ public class JobController {
     private final JobService jobService;
 
     @GetMapping
-    public ResponseEntity<List<Job>> findAll() {
+    public ResponseEntity<List<JobDto>> findAll() {
         return ResponseEntity.ok(jobService.findAll());
     }
 
@@ -28,8 +29,8 @@ public class JobController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Job> getJobById(@PathVariable Long id) {
-        Job job = jobService.getJobById(id);
+    public ResponseEntity<JobDto> getJobById(@PathVariable Long id) {
+        JobDto job = jobService.getJobById(id);
         return job != null ?
                 new ResponseEntity<>(job, HttpStatus.OK) :
                 new ResponseEntity<>(HttpStatus.NOT_FOUND);
